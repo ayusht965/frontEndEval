@@ -7,15 +7,22 @@ import { useNavigate } from "react-router-dom";
 
 export default function Card({ data }) {
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState()
     const [bookMark, setBookMark] = useState(data.isBookmarked)
     const [register, setRegister] = useState(data.isRegistered)
     const handleRegister = () => {
-        setRegister(!register);
-        makeRequest(UPDATE_EVENT(data.id), {
-            data: {
-                isRegistered: !register
-            }
-        })
+        if (data.areSeatsAvailable) {
+            setRegister(!register);
+            makeRequest(UPDATE_EVENT(data.id), {
+                data: {
+                    isRegistered: !register
+                }
+            })
+        }
+        else {
+            setErrorMessage(!errorMessage)
+        }
+
     }
     const handleClick = () => {
         navigate(`/cardDetails/${data.id}`)
@@ -29,9 +36,12 @@ export default function Card({ data }) {
         setBookMark(!bookMark)
     }
     return (
-        <div className="card">
+        <div >
             <div className="card-conatiner">
-                <img onClick={handleClick} src={data.imgUrl} />
+                <div>
+                    <img onClick={handleClick} src={data.imgUrl} />
+                </div>
+
                 <div className="content-container">
                     <div className="title">
                         {data.name}
@@ -71,6 +81,16 @@ export default function Card({ data }) {
                     </div>
                     <div onClick={handleRegister} className="register-button">
                         <div>{register ? 'UNREGISTER' : 'REGISTER'}</div>
+
+
+                        {errorMessage && <>
+                            <div style={{ height: "10px", width: "fit-content", backgroundColor: "Highlight" }} className="error-message">
+                                <span >Cannot Register: No seats available</span>
+                            </div>
+                        </>}
+
+
+
                     </div>
                 </div>
 
