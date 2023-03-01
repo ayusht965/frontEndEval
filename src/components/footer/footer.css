@@ -1,0 +1,56 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 70px;
+    background-color: #800080;
+    display: flex;
+    justify-content: space-between;
+}
+
+.theme-title {
+    color: white;
+    font-size: 17px;
+    padding: 20px 20px 0 200px;
+    font-weight: 1000;
+}
+
+.theme-container {
+    display: flex;
+}
+
+.theme-container div {
+    margin-top: 17px;
+    margin-right: 7px;
+    height: 30px;
+    width: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#th-1 {
+    background-color: #000000;
+}
+
+#th-2 {
+    background-color: #0000FF;
+}
+
+#th-3 {
+    background-color: #9B9999;
+}
+
+.theme-button {
+
+    padding: 20px 200px 0 0;
+}
+
+.theme-button-text {
+    color: #800080;
+    background-color: white;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
