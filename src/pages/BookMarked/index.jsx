@@ -7,12 +7,12 @@ import { GET_ALL_EVENTS } from '../../constants/apiEndPoint';
 
 export default function Home() {
     const [allEvents, setAllEvents] = useState();
-
     useEffect(() => {
         (makeRequest(GET_ALL_EVENTS)).then((response) => {
             setAllEvents(response)
         })
     }, [])
+
     return allEvents ?
         <div>
             <Header />

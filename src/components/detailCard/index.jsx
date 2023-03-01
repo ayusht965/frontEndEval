@@ -2,12 +2,21 @@
 import React, { useState } from "react";
 import makeRequest from "../../utils/makeRequest";
 import { UPDATE_EVENT } from "../../constants/apiEndPoint";
-import './card.css'
+import './detailCard.css'
 import { useNavigate } from "react-router-dom";
 
 export default function Card({ data }) {
     const navigate = useNavigate();
     const [bookMark, setBookMark] = useState(data.isBookmarked)
+    const [register, setRegister] = useState(data.isRegistered)
+    const handleRegister = () => {
+        setRegister(!register);
+        makeRequest(UPDATE_EVENT(data.id), {
+            data: {
+                isRegistered: !register
+            }
+        })
+    }
     const handleClick = () => {
         navigate(`/cardDetails/${data.id}`)
     }
@@ -59,6 +68,9 @@ export default function Card({ data }) {
                         <div className="bookmark-container">
                             <i onClick={handleBookMark} className={bookMark ? "fa-solid fa-bookmark" : "fa-regular fa-bookmark"} style={{ color: "#EA8282", padding: "10px" }} />
                         </div>
+                    </div>
+                    <div onClick={handleRegister} className="register-button">
+                        <div>{register ? 'UNREGISTER' : 'REGISTER'}</div>
                     </div>
                 </div>
 
