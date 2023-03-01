@@ -7,11 +7,20 @@ import { GET_ALL_EVENTS } from '../../constants/apiEndPoint';
 
 export default function Home() {
     const [allEvents, setAllEvents] = useState();
+    let filteredData = allEvents
     useEffect(() => {
+
         (makeRequest(GET_ALL_EVENTS)).then((response) => {
             setAllEvents(response)
         })
     }, [])
+    if (allEvents) {
+        filteredData = allEvents.filter((data) => {
+            return data.isBookmarked
+        })
+        console.log(filteredData);
+    }
+
 
     return allEvents ?
         <div>
