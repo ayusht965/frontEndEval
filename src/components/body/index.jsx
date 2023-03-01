@@ -57,12 +57,6 @@ export default function Body({ allEvents }) {
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
     }
-    // const data = allEvents;
-    // if (bookmark) {
-    //     data.filter((eachData) => {
-    //         return eachData.isBookmarked
-    //     })
-    // }
     const handleSubmit = () => {
 
     }
@@ -70,7 +64,7 @@ export default function Body({ allEvents }) {
 
     }
 
-
+    console.log(filteredData)
     return (
         <div>
             <div className='body-container'>

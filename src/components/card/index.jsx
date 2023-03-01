@@ -3,20 +3,24 @@ import React, { useState } from "react";
 import makeRequest from "../../utils/makeRequest";
 import { UPDATE_EVENT } from "../../constants/apiEndPoint";
 import './card.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Card({ data }) {
+    const navigate = useNavigate();
     const [bookMark, setBookMark] = useState(data.isBookmarked)
+    const handleClick = () => {
+        navigate(`/cardDetails/${data.id}`)
+    }
     const handleBookMark = () => {
         makeRequest(UPDATE_EVENT(data.id), {
             isBookmarked: !bookMark
         })
         setBookMark(!bookMark)
     }
-    console.log(data);
     return (
         <div className="card">
             <div className="card-conatiner">
-                <img src={data.imgUrl} />
+                <img onClick={handleClick} src={data.imgUrl} />
                 <div className="content-container">
                     <div className="title">
                         {data.name}
