@@ -5,6 +5,7 @@
 .body-header {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
 }
 
 .fa-filter {
@@ -41,4 +42,11 @@
 
 .fa-circle-dot {
     padding-right: 5px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
 }

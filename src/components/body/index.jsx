@@ -1,24 +1,75 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { GET_ALL_EVENTS } from '../../constants/apiEndPoint';
-import makeRequest from '../../utils/makeRequest';
 import './body.css'
-export default function Body() {
+import Card from '../card';
+// import { useNavigate } from 'react-router-dom';
+export default function Body({ allEvents }) {
+    // const navigate = useNavigate();
     const [showOptions, setShowOptions] = useState(true);
-    useEffect(() => {
-        makeRequest(GET_ALL_EVENTS).then((response) => {
-            console.log(response)
-        })
-    }, [])
+    const [all, setAll] = useState(true);
+    let filteredData = allEvents;
+    const handleAll = () => {
+        if (!all) {
+            setAll(true)
+            setBookmark(false)
+            setRegistered(false)
+            setSeats(false)
+        }
+
+    }
+    const [bookmark, setBookmark] = useState();
+    const handleBookMark = () => {
+        if (!bookmark) {
+            setBookmark(true)
+            setAll(false)
+            setRegistered(false)
+            setSeats(false)
+        }
+        filteredData = allEvents.filter((data) =>
+            data.isBookmarked == true
+        )
+    }
+    const [registered, setRegistered] = useState();
+    const handleRegister = () => {
+        if (!registered) {
+            setRegistered(true)
+            setSeats(false)
+            setAll(false)
+            setBookmark(false)
+        }
+        filteredData = allEvents.filter((data) =>
+            data.isRegistered == true
+        )
+    }
+    const [seats, setSeats] = useState();
+    const handleSeats = () => {
+        if (!seats) {
+            setSeats(true)
+            setAll(false)
+            setBookmark(false)
+            setRegistered(false)
+        }
+        filteredData = allEvents.filter((data) =>
+            data.areSeatsAvailable == true
+        )
+    }
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
     }
+    // const data = allEvents;
+    // if (bookmark) {
+    //     data.filter((eachData) => {
+    //         return eachData.isBookmarked
+    //     })
+    // }
     const handleSubmit = () => {
 
     }
     const handleChange = () => {
 
     }
+
 
     return (
         <div>
@@ -40,27 +91,33 @@ export default function Body() {
                     <div className='filter-options'>
                         <div>
                             <div className='option'>
-                                <i className='fa-solid fa-circle-dot' />
+                                <i onClick={handleAll} className={all ? 'fa-solid fa-circle-dot' : 'fa-regular fa-circle'} />
                                 <span>ALL</span>
                             </div>
                             <div className='option'>
-                                <i className='fa-regular fa-circle' />
+                                <i onClick={handleRegister} className={registered ? 'fa-solid fa-circle-dot' : 'fa-regular fa-circle'} />
                                 <span>REGISTERED</span>
                             </div>
                         </div>
                         <div>
                             <div className='option'>
-                                <i className='fa-regular fa-circle' />
+                                <i onClick={handleBookMark} className={bookmark ? 'fa-solid fa-circle-dot' : 'fa-regular fa-circle'} />
                                 <span>BOOKMARKED</span>
                             </div>
                             <div className='option'>
-                                <i className='fa-regular fa-circle' />
+                                <i onClick={handleSeats} className={seats ? 'fa-solid fa-circle-dot' : 'fa-regular fa-circle'} />
                                 <span>SEATS AVAILABLE</span>
                             </div>
                         </div>
                     </div>
                 </>}
-                { }
+                <div className='cards'>
+                    {filteredData.map((eachEvent) => {
+                        return <Card key={eachEvent.id} data={eachEvent} />
+                    })}
+                </div>
+
+
             </div>
         </div>
     );
