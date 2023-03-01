@@ -1,0 +1,44 @@
+.body-container {
+    padding: 20px 200px 0 200px;
+}
+
+.body-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa-filter {
+    padding: 0 5px 0 5px;
+}
+
+.filter-container span {
+    padding: 0 5px 0 5px;
+
+}
+
+.input {
+    width: 200px;
+    height: 20px;
+}
+
+.fa-magnifying-glass {
+    margin-left: 5px;
+}
+
+.filter-options {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-options div {
+    padding-bottom: 20px;
+}
+
+.fa-circle {
+    padding-right: 5px;
+}
+
+.fa-circle-dot {
+    padding-right: 5px;
+}
