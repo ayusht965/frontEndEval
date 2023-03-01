@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './body.css'
 import Card from '../card';
-
-export default function Body({ allEvents }) {
+import makeRequest from '../../utils/makeRequest';
+import { GET_ALL_EVENTS } from '../../constants/apiEndPoint';
+export default function Body({ allEvents, setNewData }) {
     const [data, setData] = useState(allEvents)
     const [showOptions, setShowOptions] = useState(true);
     const [all, setAll] = useState(true);
@@ -19,12 +20,14 @@ export default function Body({ allEvents }) {
 
     }
     const [bookmark, setBookmark] = useState();
-    const handleBookMark = () => {
+    const handleBookMark = async () => {
+        const newData = await (makeRequest(GET_ALL_EVENTS))
+        setNewData(newData)
         setBookmark(true)
         setAll(false)
         setRegistered(false)
         setSeats(false)
-        filteredData = allEvents.filter((data) => data.isBookmarked)
+        filteredData = newData.filter((data) => data.isBookmarked)
         setData(filteredData)
     }
     const [registered, setRegistered] = useState();
@@ -102,7 +105,7 @@ export default function Body({ allEvents }) {
                 </>}
                 <div className='cards'>
                     {data.map((eachEvent) => {
-                        return <Card key={eachEvent.id} data={eachEvent} />
+                        return <Card key={eachEvent.id} data={eachEvent} bookmark={bookmark} />
                     })}
                 </div>
 

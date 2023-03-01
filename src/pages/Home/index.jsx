@@ -13,10 +13,13 @@ export default function Home() {
             setAllEvents(response)
         })
     }, [])
+    const setNewData = (newData) => {
+        setAllEvents(newData)
+    }
     return allEvents ?
         <div>
             <Header />
-            <Body allEvents={allEvents} />
+            <Body allEvents={allEvents} setNewData={setNewData} />
             <Footer />
         </div>
         : <div>
